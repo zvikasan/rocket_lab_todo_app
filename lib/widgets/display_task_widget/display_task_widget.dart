@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rocket_lab_todo_app/widgets/display_task_widget/priority_button.dart';
 
+import '../../models/task.dart';
 import '../../theme/text_styles.dart';
 import '../../theme/theme_colors.dart';
 import 'custom_checkbox.dart';
 
 class DisplayTaskWidget extends ConsumerWidget {
-  const DisplayTaskWidget({super.key});
+  const DisplayTaskWidget({
+    super.key,
+    required this.task,
+  });
+
+  final Task task;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,13 +24,19 @@ class DisplayTaskWidget extends ConsumerWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const CustomCheckbox(),
-          const SizedBox(width: 10),
+          CustomCheckbox(task: task),
+          const SizedBox(width: 15),
           Expanded(
             child: TextFormField(
-              style:
-                  TextStyles.regular.copyWith(decoration: TextDecoration.none),
+              initialValue: task.name,
+              maxLines: 3,
+              minLines: 1,
+              style: TextStyles.small.copyWith(
+                  decoration: task.isCompleted
+                      ? TextDecoration.lineThrough
+                      : TextDecoration.none),
               textInputAction: TextInputAction.done,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -33,13 +45,19 @@ class DisplayTaskWidget extends ConsumerWidget {
                   color: ThemeColors.hintText,
                 ),
               ),
+              onChanged: (value) {
+                task.name = value;
+                task.save();
+              },
             ),
           ),
-          const PriorityButton(),
+          PriorityButton(task: task),
           IconButton(
             padding: const EdgeInsets.all(0),
             alignment: Alignment.centerRight,
-            onPressed: () {},
+            onPressed: () {
+              task.delete();
+            },
             icon: const Icon(
               Icons.delete_rounded,
               size: 30,

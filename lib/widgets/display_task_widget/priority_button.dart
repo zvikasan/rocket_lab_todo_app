@@ -1,36 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rocket_lab_todo_app/theme/text_styles.dart';
-import 'package:rocket_lab_todo_app/theme/theme_colors.dart';
+import '../../models/task.dart';
+import '../../theme/theme_colors.dart';
 
 class PriorityButton extends ConsumerWidget {
-  const PriorityButton({super.key});
+  const PriorityButton({
+    super.key,
+    required this.task,
+  });
 
-  final items = const ['Low', 'Medium', 'High'];
+  final Task task;
 
-  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+  DropdownMenuItem<TaskPriority> buildMenuItem(TaskPriority item) =>
+      DropdownMenuItem(
         value: item,
-        child: Text(item),
+        child: Text(
+          item.name,
+          style: TextStyles.small.copyWith(
+            color: priorityColor(item),
+          ),
+        ),
       );
+
+  Color priorityColor(TaskPriority priority) {
+    switch (priority) {
+      case TaskPriority.low:
+        return ThemeColors.accent2;
+      case TaskPriority.med:
+        return ThemeColors.accent1;
+      case TaskPriority.high:
+        return ThemeColors.accent3;
+      default:
+        return ThemeColors.accent1;
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      width: 60,
       decoration: BoxDecoration(
-          // border: Border.all(color: ThemeColors.background),
+          border: Border.all(color: ThemeColors.background),
           borderRadius: BorderRadius.circular(10)),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
+        child: DropdownButton<TaskPriority>(
+          value: Task.priorityFromString(task.priority),
           isDense: true,
-          iconSize: 30,
-          icon: const Icon(Icons.arrow_drop_down_rounded),
+          iconSize: 0.0,
+          icon: const SizedBox.shrink(),
           alignment: Alignment.bottomRight,
           borderRadius: BorderRadius.circular(10),
-          value: "High",
-          style: TextStyles.small, //Todo change color depending on priority
-          items: items.map(buildMenuItem).toList(),
-          onChanged: (value) {},
+          style: TextStyles.small.copyWith(
+            color: priorityColor(
+              Task.priorityFromString(task.priority),
+            ),
+          ),
+          items: TaskPriority.values.map((value) {
+            return buildMenuItem(value);
+          }).toList(),
+          onChanged: (value) {
+            task.priority = Task.priorityToString(value!);
+            task.save();
+          },
         ),
       ),
     );
