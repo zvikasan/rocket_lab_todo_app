@@ -7,6 +7,7 @@ import 'package:rocket_lab_todo_app/theme/theme_colors.dart';
 import 'package:rocket_lab_todo_app/widgets/add_task_widget.dart';
 import 'package:rocket_lab_todo_app/widgets/sort_button.dart';
 import 'package:rocket_lab_todo_app/widgets/task_list_display.dart';
+import 'package:rocket_lab_todo_app/widgets/task_numbers_display.dart';
 import 'constants/enums.dart';
 import 'models/task.dart';
 
@@ -41,37 +42,41 @@ class _ToDoListScreenState extends ConsumerState<ToDoListScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Stack(
             children: [
-              Column(
-                children: [
-                  const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "To Do:",
-                          style: TextStyles.large
-                              .copyWith(color: ThemeColors.accent1),
+              ValueListenableBuilder<Box<Task>>(
+                  valueListenable: HiveBox.getTasks().listenable(),
+                  builder: (context, box, _) {
+                    _activeTasks = box.values
+                        .where((task) => !task.isCompleted)
+                        .toList()
+                        .cast<Task>();
+                    _completedTasks = box.values
+                        .where((task) => task.isCompleted)
+                        .toList()
+                        .cast<Task>();
+                    return Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "To Do:",
+                                style: TextStyles.large
+                                    .copyWith(color: ThemeColors.accent1),
+                              ),
+                            ),
+                            SortButton(
+                              onTap: (value) => setState(() => _sortBy = value),
+                            )
+                          ],
                         ),
-                      ),
-                      SortButton(
-                        onTap: (value) => setState(() => _sortBy = value),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  Expanded(
-                    child: ValueListenableBuilder<Box<Task>>(
-                        valueListenable: HiveBox.getTasks().listenable(),
-                        builder: (context, box, _) {
-                          _activeTasks = box.values
-                              .where((task) => !task.isCompleted)
-                              .toList()
-                              .cast<Task>();
-                          _completedTasks = box.values
-                              .where((task) => task.isCompleted)
-                              .toList()
-                              .cast<Task>();
-                          return RawScrollbar(
+                        const SizedBox(height: 20),
+                        TaskNumbersDisplay(
+                            totalTasks: box.values.length,
+                            completedTasks: _completedTasks.length),
+                        const SizedBox(height: 10),
+                        Expanded(
+                          child: RawScrollbar(
                             crossAxisMargin: -15,
                             child: SingleChildScrollView(
                               child: Column(
@@ -106,12 +111,12 @@ class _ToDoListScreenState extends ConsumerState<ToDoListScreen> {
                                 ],
                               ),
                             ),
-                          );
-                        }),
-                  ),
-                  const SizedBox(height: 120),
-                ],
-              ),
+                          ),
+                        ),
+                        const SizedBox(height: 120),
+                      ],
+                    );
+                  }),
               Column(
                 children: const [
                   Spacer(),
