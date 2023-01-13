@@ -52,6 +52,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                 ),
               ),
               onFieldSubmitted: (value) {
+                if (value.isEmpty) return;
                 final task = Task()
                   ..name = value
                   ..priority = Task.priorityToString(TaskPriority.med)
