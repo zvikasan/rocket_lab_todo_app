@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../constants/enums.dart';
 import '../theme/text_styles.dart';
 import '../theme/theme_colors.dart';
 
-class SortButton extends ConsumerWidget {
+class SortButton extends StatelessWidget {
   const SortButton({
     super.key,
     required this.onTap,
@@ -38,7 +36,7 @@ class SortButton extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return PopupMenuButton(
       offset: const Offset(-10, 10),
       elevation: 10,

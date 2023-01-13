@@ -20,7 +20,7 @@ class TaskAdapter extends TypeAdapter<Task> {
       ..name = fields[0] as String
       ..priority = fields[1] as String
       ..isCompleted = fields[2] as bool
-      ..dateAdded = fields[3] as DateTime?;
+      ..dateAdded = fields[3] as DateTime;
   }
 
   @override

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rocket_lab_todo_app/hive_box.dart';
 import 'package:rocket_lab_todo_app/theme/text_styles.dart';
@@ -8,17 +7,17 @@ import 'package:rocket_lab_todo_app/widgets/add_task_widget.dart';
 import 'package:rocket_lab_todo_app/widgets/sort_button.dart';
 import 'package:rocket_lab_todo_app/widgets/task_list_display.dart';
 import 'package:rocket_lab_todo_app/widgets/task_numbers_display.dart';
-import 'constants/enums.dart';
-import 'models/task.dart';
+import '../constants/enums.dart';
+import '../models/task.dart';
 
-class ToDoListScreen extends ConsumerStatefulWidget {
+class ToDoListScreen extends StatefulWidget {
   const ToDoListScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ToDoListScreenState();
+  State<ToDoListScreen> createState() => _ToDoListScreenState();
 }
 
-class _ToDoListScreenState extends ConsumerState<ToDoListScreen> {
+class _ToDoListScreenState extends State<ToDoListScreen> {
   @override
   void dispose() {
     Hive.close();
@@ -71,9 +70,22 @@ class _ToDoListScreenState extends ConsumerState<ToDoListScreen> {
                           ],
                         ),
                         const SizedBox(height: 20),
-                        TaskNumbersDisplay(
-                            totalTasks: box.values.length,
-                            completedTasks: _completedTasks.length),
+                        box.values.isNotEmpty
+                            ? TaskNumbersDisplay(
+                                totalTasks: box.values.length,
+                                completedTasks: _completedTasks.length)
+                            : Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "No tasks here...\nWhy not add a task and start working on it?",
+                                      style: TextStyles.regular.copyWith(
+                                          color: ThemeColors.hintText),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  )
+                                ],
+                              ),
                         const SizedBox(height: 10),
                         Expanded(
                           child: RawScrollbar(

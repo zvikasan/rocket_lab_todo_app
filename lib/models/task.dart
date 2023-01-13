@@ -13,7 +13,7 @@ class Task extends HiveObject {
   @HiveField(2)
   late bool isCompleted;
   @HiveField(3)
-  late DateTime? dateAdded;
+  late DateTime dateAdded;
 
   static TaskPriority priorityFromString(String priority) {
     switch (priority) {

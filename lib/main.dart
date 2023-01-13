@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rocket_lab_todo_app/constants/global_variables.dart';
 import 'package:rocket_lab_todo_app/models/task.dart';
 import 'app.dart';
@@ -12,7 +11,7 @@ void main() async {
     await Hive.initFlutter();
     Hive.registerAdapter(TaskAdapter());
     await Hive.openBox<Task>(hiveTaskBoxName);
-    runApp(const ProviderScope(child: MyApp()));
+    runApp(const MyApp());
   }, (Object error, StackTrace stack) {
     debugPrint("Uncaught exception: ${error.toString()}");
   });

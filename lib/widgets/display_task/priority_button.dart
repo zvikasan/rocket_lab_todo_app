@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rocket_lab_todo_app/theme/text_styles.dart';
 import '../../constants/enums.dart';
 import '../../models/task.dart';
 import '../../theme/theme_colors.dart';
 
-class PriorityButton extends ConsumerWidget {
+class PriorityButton extends StatelessWidget {
   const PriorityButton({
     super.key,
     required this.task,
   });
-
   final Task task;
 
   DropdownMenuItem<TaskPriority> buildMenuItem(TaskPriority item) =>
@@ -38,7 +36,7 @@ class PriorityButton extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       width: 60,

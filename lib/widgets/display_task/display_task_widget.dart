@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rocket_lab_todo_app/widgets/display_task/priority_button.dart';
 
 import '../../models/task.dart';
@@ -7,16 +6,15 @@ import '../../theme/text_styles.dart';
 import '../../theme/theme_colors.dart';
 import 'custom_checkbox.dart';
 
-class DisplayTask extends ConsumerWidget {
+class DisplayTask extends StatelessWidget {
   const DisplayTask({
     super.key,
     required this.task,
   });
-
   final Task task;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       decoration: BoxDecoration(

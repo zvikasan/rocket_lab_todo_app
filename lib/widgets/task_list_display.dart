@@ -24,7 +24,7 @@ class TaskListDisplay extends StatelessWidget {
           .compareTo(Task.priorityFromString(a.priority).index));
     } else {
       taskList.sort(
-        (a, b) => b.dateAdded!.compareTo(a.dateAdded!),
+        (a, b) => b.dateAdded.compareTo(a.dateAdded),
       );
     }
 

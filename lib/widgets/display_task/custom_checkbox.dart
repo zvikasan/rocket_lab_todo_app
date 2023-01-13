@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rocket_lab_todo_app/theme/theme_colors.dart';
 import '../../models/task.dart';
 
-class CustomCheckbox extends ConsumerWidget {
+class CustomCheckbox extends StatelessWidget {
   const CustomCheckbox({
     super.key,
     required this.task,
@@ -12,7 +11,7 @@ class CustomCheckbox extends ConsumerWidget {
   final Task task;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         task.isCompleted = !task.isCompleted;

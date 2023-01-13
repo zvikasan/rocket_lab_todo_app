@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rocket_lab_todo_app/to_do_list_screen.dart';
+import 'package:rocket_lab_todo_app/screens/to_do_list_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
