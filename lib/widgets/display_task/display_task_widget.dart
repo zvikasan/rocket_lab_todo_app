@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rocket_lab_todo_app/widgets/display_task/priority_button.dart';
-
 import '../../models/task.dart';
 import '../../theme/text_styles.dart';
 import '../../theme/theme_colors.dart';
@@ -39,9 +38,7 @@ class DisplayTask extends StatelessWidget {
           IconButton(
             padding: const EdgeInsets.all(0),
             alignment: Alignment.centerRight,
-            onPressed: () {
-              task.delete();
-            },
+            onPressed: () => task.delete(),
             icon: const Icon(
               Icons.delete_rounded,
               size: 30,

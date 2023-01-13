@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../theme/text_styles.dart';
 
 class TaskNumbersDisplay extends StatelessWidget {

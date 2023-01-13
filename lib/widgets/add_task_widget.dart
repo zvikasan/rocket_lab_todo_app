@@ -17,11 +17,16 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
   final TextEditingController _controller = TextEditingController();
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(
-        // border: Border.all(color: ThemeColors.accent1),
         color: ThemeColors.taskBg,
         borderRadius: BorderRadius.circular(30),
         boxShadow: [

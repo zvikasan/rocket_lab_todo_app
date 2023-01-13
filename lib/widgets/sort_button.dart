@@ -10,7 +10,7 @@ class SortButton extends StatelessWidget {
   });
   final void Function(SortBy sortBy) onTap;
 
-  PopupMenuItem imageMenuItem(
+  PopupMenuItem sortButtonMenuItem(
     BuildContext context,
     SortBy sortBy,
   ) {
@@ -67,9 +67,9 @@ class SortButton extends StatelessWidget {
             ],
           ),
         ),
-        imageMenuItem(context, SortBy.name),
-        imageMenuItem(context, SortBy.priority),
-        imageMenuItem(context, SortBy.dateAdded),
+        sortButtonMenuItem(context, SortBy.name),
+        sortButtonMenuItem(context, SortBy.priority),
+        sortButtonMenuItem(context, SortBy.dateAdded),
       ],
     );
   }

@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-
 import '../constants/enums.dart';
 import '../theme/theme_colors.dart';
 part 'task.g.dart';
@@ -17,6 +16,10 @@ class Task extends HiveObject {
   @HiveField(3)
   late DateTime dateAdded;
 
+  //In order not to complicate the usage of Hive database, I am storing the task
+  //priority property as a string, but in order to keep code clear and avoid potential
+  //bugs, I still want to use enum for priority. Hence the two methods below to
+  //convert between priority as string to enum and back.
   static TaskPriority priorityFromString(String priority) {
     switch (priority) {
       case 'low':
