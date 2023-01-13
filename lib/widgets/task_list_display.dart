@@ -33,7 +33,7 @@ class TaskListDisplay extends StatelessWidget {
         for (Task task in taskList)
           Padding(
             padding: const EdgeInsets.only(bottom: 15),
-            child: DisplayTask(
+            child: DisplayTaskWidget(
               key: UniqueKey(),
               task: task,
             ),

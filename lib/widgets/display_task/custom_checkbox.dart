@@ -18,6 +18,7 @@ class CustomCheckbox extends StatelessWidget {
         task.save();
       },
       child: Container(
+        key: const Key('checkbox'),
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
             color: ThemeColors.background,

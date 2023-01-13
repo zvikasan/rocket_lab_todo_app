@@ -5,8 +5,8 @@ import '../../theme/text_styles.dart';
 import '../../theme/theme_colors.dart';
 import 'custom_checkbox.dart';
 
-class DisplayTask extends StatelessWidget {
-  const DisplayTask({
+class DisplayTaskWidget extends StatelessWidget {
+  const DisplayTaskWidget({
     super.key,
     required this.task,
   });
