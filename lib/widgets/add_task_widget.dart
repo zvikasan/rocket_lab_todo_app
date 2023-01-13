@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rocket_lab_todo_app/hive_box.dart';
 
+import '../constants/enums.dart';
 import '../models/task.dart';
 import '../theme/text_styles.dart';
 import '../theme/theme_colors.dart';
@@ -25,10 +26,8 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            // offset: Offset(0, 1),
             blurRadius: 30,
-
-            color: ThemeColors.accent1.withOpacity(0.7),
+            color: ThemeColors.accent1.withOpacity(1),
           ),
         ],
       ),
@@ -51,7 +50,8 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                 final task = Task()
                   ..name = value
                   ..priority = Task.priorityToString(TaskPriority.med)
-                  ..isCompleted = false;
+                  ..isCompleted = false
+                  ..dateAdded = DateTime.now();
                 final hiveBox = HiveBox.getTasks();
                 hiveBox.add(task);
                 _controller.text = "";

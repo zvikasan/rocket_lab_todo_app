@@ -1,12 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:hive/hive.dart';
-part 'task.g.dart';
 
-enum TaskPriority {
-  low,
-  med,
-  high,
-}
+import '../constants/enums.dart';
+part 'task.g.dart';
 
 @HiveType(typeId: 0)
 class Task extends HiveObject {
@@ -16,6 +12,8 @@ class Task extends HiveObject {
   late String priority;
   @HiveField(2)
   late bool isCompleted;
+  @HiveField(3)
+  late DateTime? dateAdded;
 
   static TaskPriority priorityFromString(String priority) {
     switch (priority) {
