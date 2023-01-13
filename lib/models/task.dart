@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../constants/enums.dart';
+import '../theme/theme_colors.dart';
 part 'task.g.dart';
 
 @HiveType(typeId: 0)
@@ -38,6 +40,19 @@ class Task extends HiveObject {
         return 'high';
       default:
         return 'medium';
+    }
+  }
+
+  static Color priorityColor(TaskPriority priority) {
+    switch (priority) {
+      case TaskPriority.low:
+        return ThemeColors.accent2;
+      case TaskPriority.med:
+        return ThemeColors.accent1;
+      case TaskPriority.high:
+        return ThemeColors.accent3;
+      default:
+        return ThemeColors.accent1;
     }
   }
 }
