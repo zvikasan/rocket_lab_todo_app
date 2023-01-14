@@ -44,6 +44,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
               style:
                   TextStyles.regular.copyWith(decoration: TextDecoration.none),
               textInputAction: TextInputAction.done,
+              textCapitalization: TextCapitalization.sentences,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "Add task",

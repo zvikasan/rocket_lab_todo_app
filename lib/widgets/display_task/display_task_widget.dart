@@ -15,7 +15,7 @@ class DisplayTaskWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
         color: ThemeColors.taskBg,
         borderRadius: BorderRadius.circular(20),
